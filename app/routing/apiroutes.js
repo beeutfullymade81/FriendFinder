@@ -4,7 +4,7 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-var friendData = require("../data/friends.js");
+var friends = require("../data/friends.js");
 var path = require('path');
 
 // ===============================================================================
@@ -19,13 +19,13 @@ var apiroutes = function (app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/friends", function (req, res) {
-    res.json(friendData);
+    res.json(friends);
   });
 
   app.post("/api/friends", function (req, res) {
-    console.log(req);
+    //console.log(req);
     var userInput = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     var userScoring = userInput.scores;
     var userImage = userInput.image;
 var userMatch = {
@@ -33,7 +33,7 @@ var userMatch = {
     Photo : "",
     totalDifference : 1000
 };
-    for (var i = 0; i < friendData.length; i++) {
+    for (var i = 0; i < friends.length; i++) {
       var difference = 0;
 
       for (var j = 0; j < userScoring.length; j++) {
@@ -47,7 +47,7 @@ var userMatch = {
       }
     }
 
-  friendData.push(userInput);
+  friends.push(userInput);
 
 
     res.json(userMatch);
